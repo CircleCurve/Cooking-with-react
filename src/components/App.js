@@ -1,5 +1,6 @@
 import React from "react";
 import RecipetList from "./RecipetList";
+import "../css/app.css";
 
 function App() {
   return <RecipetList recipes={sampleRecipes} />;
