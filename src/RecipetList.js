@@ -3,10 +3,13 @@ import Recipe from "./Recipe";
 
 export default function RecipetList({ recipes }) {
   return (
-    <div>
-      {recipes.map((recipe) => (
-        <Recipe key={recipe.id} {...recipe} />
-      ))}
-    </div>
+    <>
+      <div>
+        {recipes.map((recipe) => (
+          <Recipe key={recipe.id} {...recipe} />
+        ))}
+      </div>
+      <button>Add Recipe</button>
+    </>
   );
 }
