@@ -1,0 +1,30 @@
+.recipe-edit {
+    padding: 30px;
+    padding-top: 10px;
+    position: fixed;
+    right: 0;
+    top : 0 ;
+    width: 50%;
+    max-height: 100%;
+    overflow-y : auto;
+}
+
+.recipe-edit__form {
+    display: grid;
+    grid-template-columns: auto 1fr ;
+    column-gap: 50px;
+    row-gap: 20px;
+}
+
+.recipe-edit__ingredients {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr) auto;
+    justify-content: flex-end; 
+    column-gap: 5px;
+    row-gap: 5px;
+    padding-left: 50px;
+}
+
+.recipe-edit__ingredients input {
+    width: 100%;
+}
