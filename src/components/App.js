@@ -45,10 +45,19 @@ function App() {
     setRecipes(recipes.filter((recipe) => recipe.id !== id));
   };
 
+  const handleRecipeChange = (id, recipe) => {
+    //recipes.map((recipe) => (recipe.id === id ? newRecipe : recipe));
+    const newRecipes = [...recipes];
+    const index = newRecipes.findIndex((r) => r.id === id);
+    newRecipes[index] = recipe;
+
+    setRecipes(newRecipes);
+  };
   const recipeValueContext = {
     handleRecipeAdd,
     handleRecipeDelete,
     handleRecipeSelect,
+    handleRecipeChange,
   };
   return (
     <RecipetListContext.Provider value={recipeValueContext}>
