@@ -15,11 +15,19 @@ const cacheRecipes = () => {
 };
 
 function App() {
+  const [selectedRecipeId, setSelectedRecipeId] = useState();
   const [recipes, setRecipes] = useState(cacheRecipes);
+  const selectedRecipe = recipes.find(
+    (recipe) => recipe.id === selectedRecipeId
+  );
 
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(recipes));
   }, [recipes]);
+
+  const handleRecipeSelect = (id) => {
+    setSelectedRecipeId(id);
+  };
 
   const handleRecipeAdd = () => {
     const newRecipe = {
@@ -40,11 +48,12 @@ function App() {
   const recipeValueContext = {
     handleRecipeAdd,
     handleRecipeDelete,
+    handleRecipeSelect,
   };
   return (
     <RecipetListContext.Provider value={recipeValueContext}>
       <RecipetList recipes={recipes} />
-      <RecipeEdit />
+      {selectedRecipe && <RecipeEdit recipe={selectedRecipe} />}
     </RecipetListContext.Provider>
   );
 }
