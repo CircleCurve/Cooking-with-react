@@ -2,7 +2,7 @@ import React from "react";
 
 export default function RecipeIngredientEdit(props) {
   // const { useContext(RecipetListContext)
-  const { ingredient, handleIngredientChange } = props;
+  const { ingredient, handleIngredientChange, handleIngredientDelete } = props;
 
   const handleChange = (changes) => {
     handleIngredientChange(ingredient.id, { ...ingredient, ...changes });
@@ -13,15 +13,20 @@ export default function RecipeIngredientEdit(props) {
         className="recipe-edit__input"
         type="text"
         value={ingredient.name}
-        onInput={(e) => handleChange({ name: e.target.value })}
+        onChange={(e) => handleChange({ name: e.target.value })}
       />
       <input
         className="recipe-edit__input"
         type="text"
         value={ingredient.amount}
-        onInput={(e) => handleChange({ amount: e.target.value })}
+        onChange={(e) => handleChange({ amount: e.target.value })}
       />
-      <button className="btn btn--danger">&times;</button>
+      <button
+        className="btn btn--danger"
+        onClick={() => handleIngredientDelete(ingredient.id)}
+      >
+        &times;
+      </button>
     </>
   );
 }
