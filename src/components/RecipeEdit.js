@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
 import { RecipetListContext } from "./App";
 import RecipeIngredientEdit from "./RecipeIngredientEdit";
+import { v4 as uuidv4 } from "uuid";
 
 export default function RecipeEdit({ recipe }) {
-  const { handleRecipeChange } = useContext(RecipetListContext);
+  const { handleRecipeChange, handleRecipeSelect } =
+    useContext(RecipetListContext);
 
   const handleChange = (changes) => {
     handleRecipeChange(recipe.id, { ...recipe, ...changes });
@@ -16,10 +18,24 @@ export default function RecipeEdit({ recipe }) {
 
     handleChange({ ingredients: newIngredients });
   };
+
+  const handleIngredientAdd = () => {
+    const ingredient = {
+      id: uuidv4(),
+      name: "",
+      amount: "",
+    };
+    handleChange({ ingredients: [...recipe.ingredients, ingredient] });
+  };
   return (
     <div className="recipe-edit">
       <div className="recipe-edit__remove-button-container">
-        <button className="recipe-edit__remove-button">&times;</button>
+        <button
+          className="recipe-edit__remove-button"
+          onClick={() => handleRecipeSelect(false)}
+        >
+          &times;
+        </button>
       </div>
       <div className="recipe-edit__details-grid">
         <label htmlFor="name" className="recipe-edit__label">
@@ -80,11 +96,17 @@ export default function RecipeEdit({ recipe }) {
             key={ingredient.id}
             ingredient={ingredient}
             handleIngredientChange={handleIngredientChange}
+            handleIngredientAdd={handleIngredientAdd}
           />
         ))}
       </div>
       <div className="recipe-edit__add-ingredient-btn-container">
-        <button className="btn btn--primary">Add Ingredient</button>
+        <button
+          className="btn btn--primary"
+          onClick={(e) => handleIngredientAdd()}
+        >
+          Add Ingredient
+        </button>
       </div>
     </div>
   );
