@@ -36,6 +36,7 @@ function App() {
       servings: 1,
       cookTime: "",
       instructions: "",
+      show: true,
       ingredients: [{ id: uuidv4(), name: "", amount: "" }],
     };
     setSelectedRecipeId(newRecipe.id);
@@ -58,11 +59,23 @@ function App() {
     setRecipes(newRecipes);
   };
 
+  const handleRecipeSearch = (text) => {
+    setRecipes(
+      recipes.map((recipe) => {
+        recipe.show = recipe.name.toUpperCase().match(text.toUpperCase())
+          ? true
+          : false;
+        return recipe;
+      })
+    );
+  };
+
   const recipeValueContext = {
     handleRecipeAdd,
     handleRecipeDelete,
     handleRecipeSelect,
     handleRecipeChange,
+    handleRecipeSearch,
   };
   return (
     <RecipetListContext.Provider value={recipeValueContext}>
@@ -80,6 +93,7 @@ const sampleRecipes = [
     cookTime: "1:45",
     instructions:
       "1. Put salt on chiken\n2. Put chicken in oven\n3. Eat chiken",
+    show: true,
     ingredients: [
       {
         id: 1,
@@ -99,6 +113,7 @@ const sampleRecipes = [
     servings: 5,
     cookTime: "0:45",
     instructions: "1. Put paprika on pork\n2. Put pork in oven\n3. Eat pork",
+    show: true,
     ingredients: [
       {
         id: 1,

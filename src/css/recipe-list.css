@@ -9,3 +9,14 @@
     padding-bottom: 30px; 
     text-align: center;
 }
+
+.recipe-list input {
+    width: 100%;
+    font-size: 50px; 
+    padding: 20px; 
+    outline: none;
+}
+
+.recipe-list__search-container{
+    padding : 20px; 
+}
