@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { RecipetListContext } from "./App";
 import RecipeIngredientEdit from "./RecipeIngredientEdit";
 import { v4 as uuidv4 } from "uuid";
+import RecipePersonEdit from "./RecipePersonEdit";
 
 export default function RecipeEdit({ recipe }) {
   const { handleRecipeChange, handleRecipeSelect } =
@@ -115,6 +116,14 @@ export default function RecipeEdit({ recipe }) {
         >
           Add Ingredient
         </button>
+      </div>
+      <label className="recipe-edit__label">Persons</label>
+      <div className="recipe-edit__person-grid">
+        <div>Name</div>
+        <div></div>
+        {recipe.persons.map((person) => (
+          <RecipePersonEdit key={person.id} person={person} />
+        ))}
       </div>
     </div>
   );

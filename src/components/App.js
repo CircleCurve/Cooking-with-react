@@ -106,6 +106,16 @@ const sampleRecipes = [
         amount: "1 Tbs",
       },
     ],
+    persons: [
+      {
+        id: 1,
+        name: "Patrick",
+      },
+      {
+        id: 2,
+        name: "Ruby",
+      },
+    ],
   },
   {
     id: 2,
@@ -124,6 +134,16 @@ const sampleRecipes = [
         id: 2,
         name: "Paprika",
         amount: "1 Tbs",
+      },
+    ],
+    persons: [
+      {
+        id: 3,
+        name: "Sam",
+      },
+      {
+        id: 4,
+        name: "Father",
       },
     ],
   },
