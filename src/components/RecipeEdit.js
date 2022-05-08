@@ -36,6 +36,32 @@ export default function RecipeEdit({ recipe }) {
       ),
     });
   };
+
+  const handlePersonChange = (id, person) => {
+    const newPersons = [...recipe.persons];
+    const index = newPersons.findIndex((newPerson) => newPerson.id === id);
+    newPersons[index] = person;
+
+    handleChange({ ...recipe, persons: newPersons });
+  };
+
+  const handlePersonAdd = () => {
+    const newPerson = {
+      id: uuidv4(),
+      name: "",
+    };
+    handleChange({ ...recipe, persons: [...recipe.persons, newPerson] });
+  };
+
+  const handlePersonDelete = (id) => {
+    const newPersons = [...recipe.persons];
+
+    handleChange({
+      ...recipe,
+      persons: newPersons.filter((newPerson) => newPerson.id !== id),
+    });
+  };
+
   return (
     <div className="recipe-edit">
       <div className="recipe-edit__remove-button-container">
@@ -122,8 +148,18 @@ export default function RecipeEdit({ recipe }) {
         <div>Name</div>
         <div></div>
         {recipe.persons.map((person) => (
-          <RecipePersonEdit key={person.id} person={person} />
+          <RecipePersonEdit
+            key={person.id}
+            person={person}
+            handlePersonChange={handlePersonChange}
+            handlePersonDelete={handlePersonDelete}
+          />
         ))}
+      </div>
+      <div className="recipe-edit__add-person-btn-container">
+        <button className="btn btn--primary" onClick={(e) => handlePersonAdd()}>
+          Add Person
+        </button>
       </div>
     </div>
   );
