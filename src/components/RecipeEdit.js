@@ -9,20 +9,19 @@ export default function RecipeEdit({ recipe }) {
     useContext(RecipetListContext);
 
   const handleChange = (changes) => {
-    handleRecipeChange(recipe.id, { ...recipe, ...changes });
+    handleRecipeChange(recipe._id, { ...recipe, ...changes });
   };
 
   const handleIngredientChange = (id, ingredient) => {
     const newIngredients = [...recipe.ingredients];
-    const index = newIngredients.findIndex((i) => i.id === id);
+    const index = newIngredients.findIndex((i) => i._id === id);
     newIngredients[index] = ingredient;
-
     handleChange({ ingredients: newIngredients });
   };
 
   const handleIngredientAdd = () => {
     const ingredient = {
-      id: uuidv4(),
+      _id: uuidv4(),
       name: "",
       amount: "",
     };
@@ -32,14 +31,14 @@ export default function RecipeEdit({ recipe }) {
   const handleIngredientDelete = (id) => {
     handleChange({
       ingredients: recipe.ingredients.filter(
-        (ingredient) => ingredient.id !== id
+        (ingredient) => ingredient._id !== id
       ),
     });
   };
 
   const handlePersonChange = (id, person) => {
     const newPersons = [...recipe.persons];
-    const index = newPersons.findIndex((newPerson) => newPerson.id === id);
+    const index = newPersons.findIndex((newPerson) => newPerson._id === id);
     newPersons[index] = person;
 
     handleChange({ ...recipe, persons: newPersons });
@@ -47,7 +46,7 @@ export default function RecipeEdit({ recipe }) {
 
   const handlePersonAdd = () => {
     const newPerson = {
-      id: uuidv4(),
+      _id: uuidv4(),
       name: "",
     };
     handleChange({ ...recipe, persons: [...recipe.persons, newPerson] });
@@ -58,7 +57,7 @@ export default function RecipeEdit({ recipe }) {
 
     handleChange({
       ...recipe,
-      persons: newPersons.filter((newPerson) => newPerson.id !== id),
+      persons: newPersons.filter((newPerson) => newPerson._id !== id),
     });
   };
 
@@ -128,7 +127,7 @@ export default function RecipeEdit({ recipe }) {
         <div></div>
         {recipe.ingredients.map((ingredient) => (
           <RecipeIngredientEdit
-            key={ingredient.id}
+            key={ingredient._id}
             ingredient={ingredient}
             handleIngredientChange={handleIngredientChange}
             handleIngredientDelete={handleIngredientDelete}
@@ -149,7 +148,7 @@ export default function RecipeEdit({ recipe }) {
         <div></div>
         {recipe.persons.map((person) => (
           <RecipePersonEdit
-            key={person.id}
+            key={person._id}
             person={person}
             handlePersonChange={handlePersonChange}
             handlePersonDelete={handlePersonDelete}

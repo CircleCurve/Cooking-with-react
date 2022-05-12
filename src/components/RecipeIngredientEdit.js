@@ -5,7 +5,7 @@ export default function RecipeIngredientEdit(props) {
   const { ingredient, handleIngredientChange, handleIngredientDelete } = props;
 
   const handleChange = (changes) => {
-    handleIngredientChange(ingredient.id, { ...ingredient, ...changes });
+    handleIngredientChange(ingredient._id, { ...ingredient, ...changes });
   };
   return (
     <>
@@ -23,7 +23,7 @@ export default function RecipeIngredientEdit(props) {
       />
       <button
         className="btn btn--danger"
-        onClick={() => handleIngredientDelete(ingredient.id)}
+        onClick={() => handleIngredientDelete(ingredient._id)}
       >
         &times;
       </button>

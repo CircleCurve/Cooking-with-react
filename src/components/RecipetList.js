@@ -23,7 +23,7 @@ export default function RecipetList(props) {
         {recipes &&
           recipes
             .filter((recipe) => recipe.show)
-            .map((recipe) => <Recipe key={recipe.id} {...recipe} />)}
+            .map((recipe) => <Recipe key={recipe._id} {...recipe} />)}
       </div>
       <div className="recipe-list__add-recipe-btn-container">
         <button onClick={handleRecipeAdd} className="btn btn--primary">

@@ -4,7 +4,7 @@ export default function RecipePersonEdit(props) {
   const { person, handlePersonChange, handlePersonDelete } = props;
 
   const handleChange = (changes) => {
-    handlePersonChange(person.id, { ...person, ...changes });
+    handlePersonChange(person._id, { ...person, ...changes });
   };
   return (
     <>
@@ -15,7 +15,7 @@ export default function RecipePersonEdit(props) {
       />
       <button
         className="btn btn--danger"
-        onClick={() => handlePersonDelete(person.id)}
+        onClick={() => handlePersonDelete(person._id)}
       >
         &times;
       </button>
