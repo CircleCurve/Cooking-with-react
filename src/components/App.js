@@ -8,11 +8,11 @@ export const RecipetListContext = React.createContext();
 
 const LOCAL_STORAGE_KEY = "cookingWithReact.recipes";
 
-const cacheRecipes = () => {
-  const recipeJson = localStorage.getItem(LOCAL_STORAGE_KEY);
-  if (recipeJson != null) return JSON.parse(recipeJson);
-  return sampleRecipes;
-};
+// const cacheRecipes = () => {
+//   const recipeJson = localStorage.getItem(LOCAL_STORAGE_KEY);
+//   if (recipeJson != null) return JSON.parse(recipeJson);
+//   return sampleRecipes;
+// };
 
 function App() {
   const [selectedRecipeId, setSelectedRecipeId] = useState();
@@ -95,68 +95,68 @@ function App() {
   );
 }
 
-const sampleRecipes = [
-  {
-    id: 1,
-    name: "Plan Chiken",
-    servings: 3,
-    cookTime: "1:45",
-    instructions:
-      "1. Put salt on chiken\n2. Put chicken in oven\n3. Eat chiken",
-    show: true,
-    ingredients: [
-      {
-        id: 1,
-        name: "Chicken",
-        amount: "2 Pounds",
-      },
-      {
-        id: 2,
-        name: "Salts",
-        amount: "1 Tbs",
-      },
-    ],
-    persons: [
-      {
-        id: 1,
-        name: "Patrick",
-      },
-      {
-        id: 2,
-        name: "Ruby",
-      },
-    ],
-  },
-  {
-    id: 2,
-    name: "Plan Pork",
-    servings: 5,
-    cookTime: "0:45",
-    instructions: "1. Put paprika on pork\n2. Put pork in oven\n3. Eat pork",
-    show: true,
-    ingredients: [
-      {
-        id: 1,
-        name: "Pork",
-        amount: "3 Pounds",
-      },
-      {
-        id: 2,
-        name: "Paprika",
-        amount: "1 Tbs",
-      },
-    ],
-    persons: [
-      {
-        id: 3,
-        name: "Sam",
-      },
-      {
-        id: 4,
-        name: "Father",
-      },
-    ],
-  },
-];
+// const sampleRecipes = [
+//   {
+//     id: 1,
+//     name: "Plan Chiken",
+//     servings: 3,
+//     cookTime: "1:45",
+//     instructions:
+//       "1. Put salt on chiken\n2. Put chicken in oven\n3. Eat chiken",
+//     show: true,
+//     ingredients: [
+//       {
+//         id: 1,
+//         name: "Chicken",
+//         amount: "2 Pounds",
+//       },
+//       {
+//         id: 2,
+//         name: "Salts",
+//         amount: "1 Tbs",
+//       },
+//     ],
+//     persons: [
+//       {
+//         id: 1,
+//         name: "Patrick",
+//       },
+//       {
+//         id: 2,
+//         name: "Ruby",
+//       },
+//     ],
+//   },
+//   {
+//     id: 2,
+//     name: "Plan Pork",
+//     servings: 5,
+//     cookTime: "0:45",
+//     instructions: "1. Put paprika on pork\n2. Put pork in oven\n3. Eat pork",
+//     show: true,
+//     ingredients: [
+//       {
+//         id: 1,
+//         name: "Pork",
+//         amount: "3 Pounds",
+//       },
+//       {
+//         id: 2,
+//         name: "Paprika",
+//         amount: "1 Tbs",
+//       },
+//     ],
+//     persons: [
+//       {
+//         id: 3,
+//         name: "Sam",
+//       },
+//       {
+//         id: 4,
+//         name: "Father",
+//       },
+//     ],
+//   },
+// ];
 
 export default App;
