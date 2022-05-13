@@ -26,3 +26,12 @@
 .btn--danger:hover {
     background-color: hsl(0, 100%, 35%);
 }
+
+.btn--success {
+    color : white; 
+    background-color: hsl(120, 93%, 52%);
+}
+
+.btn--success:hover {
+    background-color: hsl(120, 93%, 35%);
+}

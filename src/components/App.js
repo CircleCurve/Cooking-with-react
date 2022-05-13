@@ -46,8 +46,8 @@ function App() {
       cookTime: "",
       instructions: "",
       show: true,
-      ingredients: [{ _id: uuidv4(), name: "", amount: "" }],
-      persons : [{_id: uuidv4(), name:""}]
+      ingredients: [{  name: "", amount: "" }],
+      persons : [{ name:""}]
     };
     setSelectedRecipeId(newRecipe._id);
     setRecipes([...recipes, newRecipe]);

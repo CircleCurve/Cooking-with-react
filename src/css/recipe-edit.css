@@ -9,8 +9,18 @@
     overflow-y : auto;
 }
 
-.recipe-edit__remove-button-container{
-    text-align: end;
+.recipe-edit__top-button-container{
+    display: flex; 
+    justify-content: flex-end;
+    margin-bottom: 16px;
+    gap: 32px;
+}
+
+.recipe-edit__submit-button {
+    padding: 0;
+    background: none;
+    outline: none;
+    border: none;
 }
 
 .recipe-edit__remove-button {

@@ -61,15 +61,34 @@ export default function RecipeEdit({ recipe }) {
     });
   };
 
+  const handleSubmit = async () => {
+    const rawResponse = await fetch(`http://localhost:3001/recipes/${recipe._id}`, {
+      method: 'PATCH',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(recipe)
+    });
+    const content = await rawResponse.json();
+  
+    console.log("after handleSubmit :" , content);
+
+  } 
+
+
   return (
     <div className="recipe-edit">
-      <div className="recipe-edit__remove-button-container">
-        <button
-          className="recipe-edit__remove-button"
-          onClick={() => handleRecipeSelect(false)}
-        >
-          &times;
-        </button>
+      <div className="recipe-edit__top-button-container">
+        <button 
+            className="btn btn--success"
+            onClick={() => handleSubmit()} >Submit</button>
+          <button
+            className="recipe-edit__remove-button"
+            onClick={() => handleRecipeSelect(false)}
+          >
+            &times;
+          </button>
       </div>
       <div className="recipe-edit__details-grid">
         <label htmlFor="name" className="recipe-edit__label">
