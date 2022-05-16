@@ -62,18 +62,44 @@ export default function RecipeEdit({ recipe }) {
   };
 
   const handleSubmit = async () => {
-    const rawResponse = await fetch(
-      `http://localhost:3001/recipes/${recipe._id}`,
-      {
-        method: "PATCH",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(recipe),
+      const rawResponse = await fetch(
+        `http://localhost:3001/recipes/${recipe._id}`,
+        {
+          method: "PATCH",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(recipe),
+        }
+      );
+      const content = await rawResponse.json();
+
+      function withError (errors ,message) {
+
+        for(const error of message) {
+
+          // console.log(error.property  , "|", errors[error.property] , "|" , message , '|' , error.constrains)
+          const constrains = error.constrains ?? error.constraints ?? null
+          errors[error.property] = {
+            constrain : constrains ? Object.keys(constrains).map(constrain => constrains[constrain]) : {} ,
+          } 
+          errors[error.property]['children'] = error.children && error.children.length > 0  ? withError({}, error.children) : [] 
+
+        }
+
+        return errors
       }
-    );
-    const content = await rawResponse.json();
+
+      if (!rawResponse.ok) { 
+        let errors = {}
+        console.log(content.message)
+        withError(errors, content.message)
+        console.log(errors)
+
+      }
+    
+
 
     // console.log("after handleSubmit :" , content);
   };

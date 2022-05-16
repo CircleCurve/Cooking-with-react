@@ -46,12 +46,12 @@ function App() {
       cookTime: "",
       instructions: "",
       show: true,
-      ingredients: [{  name: "", amount: "" }],
-      persons : [{ name:""}]
+      ingredients: [{  _id: uuidv4(),  name: "", amount: "" }],
+      persons : [{ _id: uuidv4(),  name:""}]
     };
     setSelectedRecipeId(newRecipe._id);
     setRecipes([...recipes, newRecipe]);
-  };
+  }; 
 
   const handleRecipeDelete = (id) => {
     if (selectedRecipeId != null && selectedRecipeId === id) {
