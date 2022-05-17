@@ -4,7 +4,7 @@ export default function TextField(props) {
   const { id, name, label, value, onChange, error } = props;
   return (
     <>
-      <label htmlFor="name" className="recipe-edit__label">
+      <label htmlFor={name} className="recipe-edit__label">
         {label}
       </label>
       {/* <div className="textfield"> */}

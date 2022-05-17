@@ -4,6 +4,8 @@ import RecipeIngredientEdit from "./RecipeIngredientEdit";
 import { v4 as uuidv4 } from "uuid";
 import RecipePersonEdit from "./RecipePersonEdit";
 import TextField from "./ui/Textfield";
+import NumberField from "./ui/Numberfield";
+import TextArea from "./ui/TextArea";
 
 export default function RecipeEdit({ recipe }) {
   const [errors, setErrors] = useState({});
@@ -120,9 +122,6 @@ export default function RecipeEdit({ recipe }) {
         </button>
       </div>
       <div className="recipe-edit__details-grid">
-        {/* <label htmlFor="name" className="recipe-edit__label">
-          Name
-        </label> */}
         <TextField
           name="name"
           id="name"
@@ -139,29 +138,25 @@ export default function RecipeEdit({ recipe }) {
           onChange={(e) => handleChange({ cookTime: e.target.value })}
           error={errors.cookTime}
         />
-        <label htmlFor="name" className="recipe-edit__label">
-          Servings
-        </label>
-        <input
-          type="number"
-          min="1"
+        <NumberField
           name="servings"
           id="servings"
-          className="recipe-edit__input"
+          label="Servings"
+          min="1"
           value={recipe.servings}
           onChange={(e) =>
             handleChange({ servings: parseInt(e.target.value) || "" })
           }
+          error={errors.servings}
         />
-        <label htmlFor="instructions" className="recipe-edit__label">
-          Instructions
-        </label>
-        <textarea
+
+        <TextArea
+          label="Instructions"
           name="instructions"
           id="instructions"
-          className="recipe-edit__input"
-          onChange={(e) => handleChange({ instructions: e.target.value })}
           value={recipe.instructions}
+          onChange={(e) => handleChange({ instructions: e.target.value })}
+          error={errors.instructions}
         />
       </div>
       <br />
