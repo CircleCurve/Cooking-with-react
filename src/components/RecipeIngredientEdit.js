@@ -2,8 +2,13 @@ import React from "react";
 
 export default function RecipeIngredientEdit(props) {
   // const { useContext(RecipetListContext)
-  const { ingredient, handleIngredientChange, handleIngredientDelete, error } =
-    props;
+  const {
+    ingredient,
+    handleIngredientChange,
+    handleIngredientDelete,
+    errors,
+    error,
+  } = props;
 
   const handleChange = (changes) => {
     handleIngredientChange(ingredient._id, { ...ingredient, ...changes });

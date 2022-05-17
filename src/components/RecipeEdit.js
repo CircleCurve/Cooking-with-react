@@ -169,6 +169,7 @@ export default function RecipeEdit({ recipe }) {
           <RecipeIngredientEdit
             key={ingredient._id}
             ingredient={ingredient}
+            errors={errors.ingredient ? errors.ingredients.children : []}
             handleIngredientChange={handleIngredientChange}
             handleIngredientDelete={handleIngredientDelete}
           />
