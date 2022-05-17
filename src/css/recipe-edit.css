@@ -57,10 +57,6 @@
     border: 1px solid red; 
 }
 
-span:empty::before {
-    content: "\200b"; /* unicode zero width space character */
-}
-
 .recipe-edit__details-grid span.error {
     color: red ; 
     font-size: 20px;

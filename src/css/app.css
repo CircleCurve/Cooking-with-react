@@ -22,6 +22,10 @@ body {
     margin : 0 ;
 }
 
+span:empty::before {
+    content: "\200b"; /* unicode zero width space character */
+}
+
 .mr-1 {
     margin-right: 5px;
 }

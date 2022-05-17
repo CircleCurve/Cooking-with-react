@@ -2,7 +2,8 @@ import React from "react";
 
 export default function RecipeIngredientEdit(props) {
   // const { useContext(RecipetListContext)
-  const { ingredient, handleIngredientChange, handleIngredientDelete } = props;
+  const { ingredient, handleIngredientChange, handleIngredientDelete, error } =
+    props;
 
   const handleChange = (changes) => {
     handleIngredientChange(ingredient._id, { ...ingredient, ...changes });
@@ -27,6 +28,14 @@ export default function RecipeIngredientEdit(props) {
       >
         &times;
       </button>
+
+      <span className="error">
+        {error && error.constrains.map((fieldError) => fieldError)}
+      </span>
+      <span className="error">
+        {error && error.constrains.map((fieldError) => fieldError)}
+      </span>
+      <div />
     </>
   );
 }
