@@ -1,10 +1,13 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { RecipetListContext } from "./App";
 import RecipeIngredientEdit from "./RecipeIngredientEdit";
 import { v4 as uuidv4 } from "uuid";
 import RecipePersonEdit from "./RecipePersonEdit";
+import TextField from "./ui/Textfield";
 
 export default function RecipeEdit({ recipe }) {
+  const [errors, setErrors] = useState({});
+
   const { handleRecipeChange, handleRecipeSelect } =
     useContext(RecipetListContext);
 
@@ -62,44 +65,43 @@ export default function RecipeEdit({ recipe }) {
   };
 
   const handleSubmit = async () => {
-      const rawResponse = await fetch(
-        `http://localhost:3001/recipes/${recipe._id}`,
-        {
-          method: "PATCH",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(recipe),
-        }
-      );
-      const content = await rawResponse.json();
+    const rawResponse = await fetch(
+      `http://localhost:3001/recipes/${recipe._id}`,
+      {
+        method: "PATCH",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(recipe),
+      }
+    );
+    const content = await rawResponse.json();
 
-      function withError (errors ,message) {
-
-        for(const error of message) {
-
-          // console.log(error.property  , "|", errors[error.property] , "|" , message , '|' , error.constrains)
-          const constrains = error.constrains ?? error.constraints ?? null
-          errors[error.property] = {
-            constrain : constrains ? Object.keys(constrains).map(constrain => constrains[constrain]) : {} ,
-          } 
-          errors[error.property]['children'] = error.children && error.children.length > 0  ? withError({}, error.children) : [] 
-
-        }
-
-        return errors
+    function withError(errors, message) {
+      for (const error of message) {
+        // console.log(error.property  , "|", errors[error.property] , "|" , message , '|' , error.constrains)
+        const constrains = error.constrains ?? error.constraints ?? null;
+        errors[error.property] = {
+          constrains: constrains
+            ? Object.keys(constrains).map((constrain) => constrains[constrain])
+            : {},
+        };
+        errors[error.property]["children"] =
+          error.children && error.children.length > 0
+            ? withError({}, error.children)
+            : [];
       }
 
-      if (!rawResponse.ok) { 
-        let errors = {}
-        console.log(content.message)
-        withError(errors, content.message)
-        console.log(errors)
+      return errors;
+    }
 
-      }
-    
-
+    if (!rawResponse.ok) {
+      let errors = {};
+      console.log(content.message);
+      setErrors(withError(errors, content.message));
+      console.log(errors);
+    }
 
     // console.log("after handleSubmit :" , content);
   };
@@ -118,27 +120,24 @@ export default function RecipeEdit({ recipe }) {
         </button>
       </div>
       <div className="recipe-edit__details-grid">
-        <label htmlFor="name" className="recipe-edit__label">
+        {/* <label htmlFor="name" className="recipe-edit__label">
           Name
-        </label>
-        <input
-          type="text"
+        </label> */}
+        <TextField
           name="name"
           id="name"
-          className="recipe-edit__input"
+          label="Name"
           value={recipe.name}
           onChange={(e) => handleChange({ name: e.target.value })}
+          error={errors.name}
         />
-        <label htmlFor="cookTime" className="recipe-edit__label">
-          Cook time
-        </label>
-        <input
-          type="text"
+        <TextField
           name="cookTime"
           id="cookTime"
-          className="recipe-edit__input"
+          label="Cook time"
           value={recipe.cookTime}
           onChange={(e) => handleChange({ cookTime: e.target.value })}
+          error={errors.cookTime}
         />
         <label htmlFor="name" className="recipe-edit__label">
           Servings
