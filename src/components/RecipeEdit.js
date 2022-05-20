@@ -8,7 +8,6 @@ import NumberField from "./ui/Numberfield";
 import TextArea from "./ui/TextArea";
 
 export default function RecipeEdit({ recipe, errors }) {
-  console.log("errors : ", errors, " recipe : ", recipe);
   const { handleRecipeChange, handleErrorChange, handleRecipeSelect } =
     useContext(RecipetListContext);
 

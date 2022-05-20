@@ -15,8 +15,6 @@ export default function RecipeIngredientEdit(props) {
     handleIngredientChange(ingredient._id, { ...ingredient, ...changes });
   };
 
-  console.log("errors :", errors);
-
   const Header = () => (
     <div className="recipe-edit__ingredient-grid-item">
       <div>Name</div>
@@ -24,66 +22,46 @@ export default function RecipeIngredientEdit(props) {
       <div></div>
     </div>
   );
-  const Element = () => (
-    <div className="recipe-edit__ingredient-grid-item">
-      <TextField
-        showLabel={false}
-        showError={false}
-        value={ingredient.name}
-        onChange={(e) => handleChange({ name: e.target.value })}
-      />
-      {/* <input
-          className="recipe-edit__input"
-          type="text"
+
+  return (
+    <>
+      {isFirst ? <Header /> : ""}
+      <div className="recipe-edit__ingredient-grid-item">
+        <TextField
+          showLabel={false}
+          showError={false}
           value={ingredient.name}
           onChange={(e) => handleChange({ name: e.target.value })}
+          error={errors["name"]}
         />
-        <span className="error">
-          {errors["name"]?.constrains?.map((error) => error) ?? ""}
-        </span> */}
-      <input
-        className="recipe-edit__input"
-        type="text"
-        value={ingredient.amount}
-        onChange={(e) => handleChange({ amount: e.target.value })}
-      />
-      {/* <span className="error">
-        {errors["amount"]?.constrains?.map((error) => error) ?? ""}
-      </span> */}
-      <button
-        className="btn btn--danger"
-        onClick={() => handleIngredientDelete(ingredient._id)}
-      >
-        &times;
-      </button>
-      <TextField
-        showLabel={false}
-        showInput={false}
-        showError={true}
-        error={errors["name"]}
-      />
-      <TextField
-        showLabel={false}
-        showInput={false}
-        showError={true}
-        error={errors["amount"]}
-      />
-      <div />
-    </div>
-  );
+        <TextField
+          showLabel={false}
+          showError={false}
+          value={ingredient.amount}
+          onChange={(e) => handleChange({ amount: e.target.value })}
+          error={errors["amount"]}
+        />
 
-  const RenderElement = () => (
-    <>
-      {isFirst ? (
-        <>
-          <Header />
-          <Element />
-        </>
-      ) : (
-        <Element />
-      )}
+        <button
+          className="btn btn--danger"
+          onClick={() => handleIngredientDelete(ingredient._id)}
+        >
+          &times;
+        </button>
+        <TextField
+          showLabel={false}
+          showInput={false}
+          showError={true}
+          error={errors["name"]}
+        />
+        <TextField
+          showLabel={false}
+          showInput={false}
+          showError={true}
+          error={errors["amount"]}
+        />
+        <div />
+      </div>
     </>
   );
-  // const RenderElement = isFirst ? Header : Element;
-  return <RenderElement />;
 }

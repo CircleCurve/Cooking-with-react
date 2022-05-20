@@ -38,6 +38,7 @@ function App() {
 
   const handleRecipeSelect = (id) => {
     setSelectedRecipeId(id);
+    setErrors({});
   };
 
   const handleRecipeAdd = () => {
@@ -53,6 +54,7 @@ function App() {
     };
     setSelectedRecipeId(newRecipe._id);
     setRecipes([...recipes, newRecipe]);
+    setErrors({});
   };
 
   const handleRecipeDelete = (id) => {
@@ -60,6 +62,7 @@ function App() {
       setSelectedRecipeId(undefined);
     }
     setRecipes(recipes.filter((recipe) => recipe._id !== id));
+    setErrors({});
   };
 
   const handleRecipeChange = (id, recipe) => {
@@ -69,6 +72,7 @@ function App() {
     newRecipes[index] = recipe;
 
     setRecipes(newRecipes);
+    setErrors({});
   };
 
   const handleRecipeSearch = (text) => {
