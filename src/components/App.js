@@ -20,15 +20,17 @@ function App() {
   const selectedRecipe = recipes.find(
     (recipe) => recipe._id === selectedRecipeId
   );
+  //api errors
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
-    fetch('http://localhost:3001/recipes')
-    .then((res) => res.json())
-    .then((data) => {
-      setRecipes(data)
-    })
-    .catch(e => console.log("fetch data error :", e))
-  }, [])
+    fetch("http://localhost:3001/recipes")
+      .then((res) => res.json())
+      .then((data) => {
+        setRecipes(data);
+      })
+      .catch((e) => console.log("fetch data error :", e));
+  }, []);
 
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(recipes));
@@ -46,12 +48,12 @@ function App() {
       cookTime: "",
       instructions: "",
       show: true,
-      ingredients: [{  _id: uuidv4(),  name: "", amount: "" }],
-      persons : [{ _id: uuidv4(),  name:""}]
+      ingredients: [{ _id: uuidv4(), name: "", amount: "" }],
+      persons: [{ _id: uuidv4(), name: "" }],
     };
     setSelectedRecipeId(newRecipe._id);
     setRecipes([...recipes, newRecipe]);
-  }; 
+  };
 
   const handleRecipeDelete = (id) => {
     if (selectedRecipeId != null && selectedRecipeId === id) {
@@ -80,17 +82,22 @@ function App() {
     );
   };
 
+  const handleErrorChange = (error) => {
+    setErrors(error);
+  };
   const recipeValueContext = {
     handleRecipeAdd,
     handleRecipeDelete,
     handleRecipeSelect,
     handleRecipeChange,
     handleRecipeSearch,
+    handleErrorChange,
   };
+
   return (
     <RecipetListContext.Provider value={recipeValueContext}>
-       <RecipetList recipes={recipes} />
-      {selectedRecipe && <RecipeEdit recipe={selectedRecipe} />}
+      <RecipetList recipes={recipes} />
+      {selectedRecipe && <RecipeEdit recipe={selectedRecipe} errors={errors} />}
     </RecipetListContext.Provider>
   );
 }

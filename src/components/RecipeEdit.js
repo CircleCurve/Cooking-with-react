@@ -7,12 +7,15 @@ import TextField from "./ui/Textfield";
 import NumberField from "./ui/Numberfield";
 import TextArea from "./ui/TextArea";
 
-export default function RecipeEdit({ recipe }) {
-  const [errors, setErrors] = useState({});
-
-  const { handleRecipeChange, handleRecipeSelect } =
+export default function RecipeEdit({ recipe, errors }) {
+  console.log("errors : ", errors, " recipe : ", recipe);
+  const { handleRecipeChange, handleErrorChange, handleRecipeSelect } =
     useContext(RecipetListContext);
 
+  const handleFormErrorChange = (changes) => {
+    console.log("changes :", changes);
+    handleErrorChange(changes);
+  };
   const handleChange = (changes) => {
     handleRecipeChange(recipe._id, { ...recipe, ...changes });
   };
@@ -101,7 +104,7 @@ export default function RecipeEdit({ recipe }) {
     if (!rawResponse.ok) {
       let errors = {};
       console.log(content.message);
-      setErrors(withError(errors, content.message));
+      handleFormErrorChange(withError(errors, content.message));
       console.log(errors);
     }
 
@@ -162,16 +165,14 @@ export default function RecipeEdit({ recipe }) {
       <br />
       <label className="recipe-edit__label">Ingredients</label>
       <div className="recipe-edit__ingredient-grid">
-        <div>Name</div>
-        <div>Amount</div>
-        <div></div>
-        {recipe.ingredients.map((ingredient) => (
+        {recipe.ingredients.map((ingredient, index) => (
           <RecipeIngredientEdit
             key={ingredient._id}
             ingredient={ingredient}
-            errors={errors.ingredient ? errors.ingredients.children : []}
             handleIngredientChange={handleIngredientChange}
             handleIngredientDelete={handleIngredientDelete}
+            errors={errors.ingredients?.children[index]?.children ?? {}}
+            isFirst={index === 0}
           />
         ))}
       </div>
