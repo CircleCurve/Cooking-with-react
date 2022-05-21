@@ -185,14 +185,18 @@ export default function RecipeEdit({ recipe, errors }) {
       </div>
       <label className="recipe-edit__label">Persons</label>
       <div className="recipe-edit__person-grid">
-        <div>Name</div>
-        <div></div>
-        {recipe.persons.map((person) => (
+        <div className="recipe-edit__person-grid-item">
+          <div>Name</div>
+          <div></div>
+        </div>
+        {recipe.persons.map((person, index) => (
           <RecipePersonEdit
             key={person._id}
             person={person}
             handlePersonChange={handlePersonChange}
             handlePersonDelete={handlePersonDelete}
+            errors={errors.ingredients?.children[index]?.children ?? {}}
+            isFirst={index === 0}
           />
         ))}
       </div>

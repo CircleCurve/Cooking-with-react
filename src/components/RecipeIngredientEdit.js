@@ -16,17 +16,17 @@ export default function RecipeIngredientEdit(props) {
   };
 
   const Header = () => (
-    <div className="recipe-edit__ingredient-grid-item">
+    <>
       <div>Name</div>
       <div>Amount</div>
       <div></div>
-    </div>
+    </>
   );
 
   return (
     <>
-      {isFirst ? <Header /> : ""}
       <div className="recipe-edit__ingredient-grid-item">
+        {isFirst ? <Header /> : ""}
         <TextField
           showLabel={false}
           showError={false}

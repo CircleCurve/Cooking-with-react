@@ -1,11 +1,13 @@
 import React from "react";
 
 export default function RecipePersonEdit(props) {
-  const { person, handlePersonChange, handlePersonDelete } = props;
+  const { person, handlePersonChange, handlePersonDelete, errors, isFirst } =
+    props;
 
   const handleChange = (changes) => {
     handlePersonChange(person._id, { ...person, ...changes });
   };
+
   return (
     <>
       <input
