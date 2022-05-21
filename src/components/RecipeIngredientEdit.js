@@ -24,44 +24,42 @@ export default function RecipeIngredientEdit(props) {
   );
 
   return (
-    <>
-      <div className="recipe-edit__ingredient-grid-item">
-        {isFirst ? <Header /> : ""}
-        <TextField
-          showLabel={false}
-          showError={false}
-          value={ingredient.name}
-          onChange={(e) => handleChange({ name: e.target.value })}
-          error={errors["name"]}
-        />
-        <TextField
-          showLabel={false}
-          showError={false}
-          value={ingredient.amount}
-          onChange={(e) => handleChange({ amount: e.target.value })}
-          error={errors["amount"]}
-        />
+    <div className="recipe-edit__ingredient-grid-item">
+      {isFirst ? <Header /> : ""}
+      <TextField
+        showLabel={false}
+        showError={false}
+        value={ingredient.name}
+        onChange={(e) => handleChange({ name: e.target.value })}
+        error={errors["name"]}
+      />
+      <TextField
+        showLabel={false}
+        showError={false}
+        value={ingredient.amount}
+        onChange={(e) => handleChange({ amount: e.target.value })}
+        error={errors["amount"]}
+      />
 
-        <button
-          className="btn btn--danger"
-          onClick={() => handleIngredientDelete(ingredient._id)}
-        >
-          &times;
-        </button>
-        <TextField
-          showLabel={false}
-          showInput={false}
-          showError={true}
-          error={errors["name"]}
-        />
-        <TextField
-          showLabel={false}
-          showInput={false}
-          showError={true}
-          error={errors["amount"]}
-        />
-        <div />
-      </div>
-    </>
+      <button
+        className="btn btn--danger"
+        onClick={() => handleIngredientDelete(ingredient._id)}
+      >
+        &times;
+      </button>
+      <TextField
+        showLabel={false}
+        showInput={false}
+        showError={true}
+        error={errors["name"]}
+      />
+      <TextField
+        showLabel={false}
+        showInput={false}
+        showError={true}
+        error={errors["amount"]}
+      />
+      <div />
+    </div>
   );
 }

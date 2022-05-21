@@ -109,13 +109,7 @@ textarea.recipe-edit__input  {
 
 
 
-.recipe-edit__person-grid {
-    display:grid ; 
-    grid-template-columns: 1fr auto;
-    gap : 10px;
-    margin-top: 20px ;
-    margin-left: 40px;
-}
+
 
 .recipe-edit__person-grid input{
     border: 1px solid black;
@@ -124,6 +118,14 @@ textarea.recipe-edit__input  {
     padding: 5px 10px;
     outline: none;
     width: 100%;
+}
+
+.recipe-edit__person-grid-item {
+    display:grid ; 
+    grid-template-columns: 1fr auto;
+    gap : 10px;
+    margin-top: 20px ;
+    margin-left: 40px;
 }
 
 .recipe-edit__person-grid button {
