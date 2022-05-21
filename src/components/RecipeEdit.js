@@ -6,6 +6,7 @@ import RecipePersonEdit from "./RecipePersonEdit";
 import TextField from "./ui/Textfield";
 import NumberField from "./ui/Numberfield";
 import TextArea from "./ui/TextArea";
+import { getApiRequest } from "../api/api";
 
 export default function RecipeEdit({ recipe, errors }) {
   const { handleRecipeChange, handleErrorChange, handleRecipeSelect } =
@@ -69,17 +70,8 @@ export default function RecipeEdit({ recipe, errors }) {
   };
 
   const handleSubmit = async () => {
-    const rawResponse = await fetch(
-      `http://localhost:3001/recipes/${recipe._id}`,
-      {
-        method: "PATCH",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(recipe),
-      }
-    );
+    const requestType = recipe.isNewRecipe ? "addRecipe" : "updateRecipe";
+    const rawResponse = await getApiRequest(requestType)(recipe);
     const content = await rawResponse.json();
 
     function withError(errors, message) {

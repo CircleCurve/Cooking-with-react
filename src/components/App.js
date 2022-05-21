@@ -44,6 +44,7 @@ function App() {
   const handleRecipeAdd = () => {
     const newRecipe = {
       _id: uuidv4(),
+      isNewRecipe: true,
       name: "",
       servings: 1,
       cookTime: "",
